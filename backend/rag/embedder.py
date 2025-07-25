@@ -1,8 +1,12 @@
 import requests
 import logging
 from typing import List
+import os
+from dotenv import load_dotenv
 
-JINA_API_KEY = "jina_16c2883ab0a04e7292f7b3d56ba6c387LOXnRrP073vyx6ZpVe0CXEe7c9I3"  
+load_dotenv()
+
+JINA_API_KEY = os.getenv('EMBEDDING_KEY')
 JINA_ENDPOINT = "https://api.jina.ai/v1/embeddings"
 
 def get_jina_embeddings(texts: List[str], task: str = "text-matching") -> List[List[float]]:

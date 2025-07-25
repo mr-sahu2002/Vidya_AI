@@ -3,12 +3,15 @@ from typing import Optional, List
 import tempfile
 import os
 from datetime import datetime
+from dotenv import load_dotenv
 import json # Import json for structured output
 
+load_dotenv()
+
 # Assume these services are correctly implemented in their respective files
-from .services.extractor import extract_content_universal # Already there
-from .services.embedder import get_jina_embeddings, get_single_jina_embedding # get_single_jina_embedding added
-from .services.qdrant_service import ( # All these are already there
+from rag.extractor import extract_content_universal # Already there
+from rag.embedder import get_jina_embeddings, get_single_jina_embedding # get_single_jina_embedding added
+from rag.qdrant_service import ( # All these are already there
     create_virtual_class,
     store_chunks_in_class,
     search_class_content,
@@ -21,7 +24,7 @@ from groq import Groq # Assuming you've installed 'groq-sdk'
 
 # Initialize Groq client
 # Ensure GROQ_API_KEY is set in your environment variables
-groq_client = Groq(api_key='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',)
+groq_client = Groq(api_key=os.getenv('LLM_KEY'))
 
 router = APIRouter()
 

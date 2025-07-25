@@ -1,1 +1,4 @@
 experiment/
+others/
+.env
+data/
