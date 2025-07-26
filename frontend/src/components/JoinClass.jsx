@@ -36,6 +36,9 @@ const JoinClass = () => {
           <button type="submit" className="joinclass-btn">
             join
           </button>
+          <button onClick={() => navigate("/persona")} className="login-submit">
+            Edit Persona
+        </button>
         </form>
       </div>
     </div>

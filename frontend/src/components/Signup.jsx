@@ -18,7 +18,8 @@ const Signup = () => {
     }
 
     if (role === "student") {
-      navigate("/persona", { state: { name, username, email } });
+      navigate("/login");
+      
     } else {
       navigate("/login");
     }

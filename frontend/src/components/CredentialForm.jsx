@@ -18,6 +18,9 @@ const CredentialForm = () => {
 
     if (username.trim() !== "" && password.trim() !== "") {
       if (role === "student") {
+        <button onClick={() => navigate("/persona")} className="login-submit">
+            Edit Persona
+        </button>
         navigate("/student/join-class", { state: { username } });
       } else if (role === "teacher") {
         navigate("/teacher/dashboard", { state: { username, name: teacherName, email: teacherEmail } });
