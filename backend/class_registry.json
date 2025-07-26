@@ -19,5 +19,12 @@
     "subject": "Mathematics",
     "collection": "class_teacher_123_58511d47_mathematics",
     "created_at": "2025-07-25T20:57:17.404601"
+  },
+  "class_teacher_123_0fa7106b": {
+    "teacher_id": "teacher_123",
+    "class_name": "Math Class 101",
+    "subject": "Mathematics",
+    "collection": "class_teacher_123_0fa7106b_mathematics",
+    "created_at": "2025-07-26T00:36:08.084187"
   }
 }

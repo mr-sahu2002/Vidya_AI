@@ -1,7 +1,5 @@
 import uuid
 import logging
-import json
-import os
 from datetime import datetime
 from typing import List, Dict, Optional
 from qdrant_client import QdrantClient
@@ -9,78 +7,57 @@ from qdrant_client.models import (
     Distance, VectorParams, PointStruct, 
     Filter, FieldCondition, MatchValue
 )
+import firebase_admin
+from firebase_admin import firestore,credentials
 
-# Initialize client
+# Initialize Firebase if not already initialized
+if not firebase_admin._apps:
+    # Initialize with service account key
+    cred = credentials.Certificate("C:\\Users\\asp00\\Downloads\\vidyaai-1dcfa-firebase-adminsdk-fbsvc-513f50d8d1.json")
+    firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 qdrant_client = QdrantClient(host="localhost", port=6333)
-
-# Persistent class registry
-CLASS_REGISTRY_FILE = "class_registry.json"
-CLASS_REGISTRY = {}
-
-# Load existing registry on startup
-def load_registry():
-    global CLASS_REGISTRY
-    try:
-        if os.path.exists(CLASS_REGISTRY_FILE):
-            with open(CLASS_REGISTRY_FILE, 'r') as f:
-                CLASS_REGISTRY = json.load(f)
-    except Exception as e:
-        logging.error(f"Failed to load class registry: {str(e)}")
-
-# Save registry to file
-def save_registry():
-    try:
-        with open(CLASS_REGISTRY_FILE, 'w') as f:
-            json.dump(CLASS_REGISTRY, f, indent=2)
-    except Exception as e:
-        logging.error(f"Failed to save class registry: {str(e)}")
-
-# Load registry immediately on import
-load_registry()
 
 # =====================
 # CLASS MANAGEMENT
 # =====================
-
 def create_virtual_class(teacher_id: str, class_name: str, subject: str) -> Dict:
     """Create a new virtual class with unique collection"""
-    class_id = f"class_{teacher_id}_{uuid.uuid4().hex[:8]}"
-    collection_name = f"{class_id}_{subject.lower()}"
-    
-    CLASS_REGISTRY[class_id] = {
-        "teacher_id": teacher_id,
-        "class_name": class_name,
-        "subject": subject,
-        "collection": collection_name,
-        "created_at": datetime.now().isoformat()
-    }
-    
-    save_registry()  # Save to file after modification
-    
-    return {
-        "class_id": class_id,
-        "collection": collection_name,
-        "subject": subject
-    }
+    try:
+        # Generate unique collection name
+        collection_name = f"class_{teacher_id}_{uuid.uuid4().hex[:8]}_{subject.lower()}"
+        
+        # Create collection in Qdrant
+        qdrant_client.recreate_collection(
+            collection_name=collection_name,
+            vectors_config=VectorParams(size=768, distance=Distance.COSINE)
+        )
+        create_payload_indexes(collection_name)
+        
+        return {
+            "status": "success",
+            "collection": collection_name,
+            "subject": subject
+        }
+    except Exception as e:
+        logging.error(f"Class creation failed: {str(e)}")
+        return {"status": "error", "message": str(e)}
 
 def get_class_collection(class_id: str) -> str:
-    """Get collection name for a class"""
-    return CLASS_REGISTRY.get(class_id, {}).get("collection", "")
+    """Get collection name for a class from Firestore"""
+    try:
+        class_doc = db.collection('classes').document(class_id).get()
+        if class_doc.exists:
+            return class_doc.to_dict().get('qdrant_collection', '')
+        return ""
+    except Exception as e:
+        logging.error(f"Firestore access failed: {str(e)}")
+        return ""
 
 # =====================
 # COLLECTION MANAGEMENT
 # =====================
-
-def ensure_collection(collection_name: str, vector_dim: int) -> None:
-    """Create collection if not exists with proper indexes"""
-    existing_collections = [col.name for col in qdrant_client.get_collections().collections]
-    
-    if collection_name not in existing_collections:
-        qdrant_client.recreate_collection(
-            collection_name=collection_name,
-            vectors_config=VectorParams(size=vector_dim, distance=Distance.COSINE))
-        create_payload_indexes(collection_name)
-
 def create_payload_indexes(collection_name: str):
     """Create indexes for efficient filtering"""
     for field in ["class_id", "subject", "content_type", "grade_level", "difficulty"]:
@@ -96,18 +73,15 @@ def create_payload_indexes(collection_name: str):
 # =====================
 # DATA OPERATIONS
 # =====================
-
 def store_chunks_in_class(class_id: str, chunks: List[Dict], embeddings: List[List[float]]) -> Dict:
     """Store chunks in class-specific collection"""
     collection_name = get_class_collection(class_id)
     if not collection_name:
         return {"status": "error", "message": "Invalid class ID"}
     
-    ensure_collection(collection_name, len(embeddings[0]))
-    
     points = []
     for chunk, embedding in zip(chunks, embeddings):
-        # Generate deterministic UUID from unique content identifiers
+        # Generate deterministic UUID
         unique_str = f"{class_id}_{chunk['filename']}_{chunk['page_number']}_{chunk['chunk_index']}"
         point_id = uuid.uuid5(uuid.NAMESPACE_DNS, unique_str)
         
@@ -116,8 +90,7 @@ def store_chunks_in_class(class_id: str, chunks: List[Dict], embeddings: List[Li
             vector=embedding,
             payload={
                 **chunk,
-                "class_id": class_id,  # Critical for filtering
-                "stored_at": datetime.now().isoformat()
+                "class_id": class_id  # Critical for filtering
             }
         ))
     
@@ -132,8 +105,12 @@ def store_chunks_in_class(class_id: str, chunks: List[Dict], embeddings: List[Li
         logging.error(f"Storage failed: {str(e)}")
         return {"status": "error", "message": str(e)}
 
-def search_class_content(class_id: str, query_embedding: List[float], 
-                        filters: Optional[Dict] = None, limit: int = 5) -> List[Dict]:
+def search_class_content(
+    class_id: str, 
+    query_embedding: List[float], 
+    filters: Optional[Dict] = None, 
+    limit: int = 5
+) -> List[Dict]:
     """Search within a specific class collection"""
     collection_name = get_class_collection(class_id)
     if not collection_name:
@@ -150,7 +127,7 @@ def search_class_content(class_id: str, query_embedding: List[float],
                     FieldCondition(key=field, match=MatchValue(value=value))
                 )
     
-    search_filter = Filter(must=must_conditions)
+    search_filter = Filter(must=must_conditions) if must_conditions else None
     
     try:
         results = qdrant_client.search(
@@ -188,16 +165,7 @@ def get_class_stats(class_id: str) -> Dict:
             "class_id": class_id,
             "collection": collection_name,
             "chunk_count": info.points_count,
-            "status": "active",
             "vectors": info.config.params.vectors
         }
     except Exception as e:
         return {"status": "error", "message": str(e)}
-        
-def get_class_subject(class_id: str) -> Dict[str, any]:
-    """Get subject from class registry, returning a dict with status."""
-    class_info = CLASS_REGISTRY.get(class_id)
-    if class_info:
-        return {"status": "success", "subject": class_info.get("subject", "general")}
-    else:
-        return {"status": "error", "message": f"Class ID {class_id} not found."}

@@ -3,7 +3,6 @@ import re
 import logging
 from pathlib import Path
 from typing import List, Dict
-from .qdrant_service import get_class_subject  
 
 def extract_content_universal(file_path: str, metadata: Dict) -> List[Dict]:
     file_extension = Path(file_path).suffix.lower()
@@ -56,7 +55,7 @@ def chunk_text_with_metadata(
     
     # Get subject from class registry
     class_id = metadata.get("class_id")
-    subject = get_class_subject(class_id) if class_id else "general"
+    subject = metadata.get("subject", "general")
     
     for idx, chunk in enumerate(chunks):
         chunk_data = {
