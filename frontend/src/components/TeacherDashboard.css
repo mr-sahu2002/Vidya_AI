@@ -1,0 +1,344 @@
+.teacherDashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+}
+
+/* Sidebar styling */
+.teacherSidebar {
+  width: 240px;
+  background: #fff;
+  box-shadow: 1.5px 0 6px rgba(36,50,120,0.06);
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e5e7eb;
+}
+
+.sidebarLogo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 1.17rem;
+  font-weight: bold;
+  color: #2c356a;
+  padding: 27px 0 15px 22px;
+  border-bottom: 1px solid #f5f5f7;
+}
+
+.emoji {
+  font-size: 1.35rem;
+  margin-right: 1px;
+}
+
+.brand {
+  letter-spacing: -0.5px;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  gap: 1.5px;
+}
+
+.sidebarBtn {
+  background: none;
+  border: none;
+  color: #223355;
+  text-align: left;
+  font-size: 1.06rem;
+  padding: 13px 15px 13px 38px;
+  transition: background 0.17s, color 0.17s;
+  border-radius: 0 28px 28px 0;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.sidebarBtn:hover,
+.sidebarBtn:focus {
+  background: #e6ecfa;
+  color: #4972db;
+  outline: none;
+}
+
+/* Main content */
+.dashboardMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboardHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  justify-content: flex-end;
+  padding: 25px 38px 0 0;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+}
+
+.profileAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dde5ff 70%, #888ba6 100%);
+  color: #3c4e70;
+  font-size: 1.38rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.13s;
+  box-shadow: 0 2px 6px rgba(132,152,200,0.06);
+}
+
+.profileAvatar:hover {
+  box-shadow: 0 4px 12px rgba(132,152,200,0.13);
+}
+
+.profilePopover {
+  position: absolute;
+  right: 38px;
+  top: 54px;
+  z-index: 4;
+  min-width: 210px;
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 2px 20px rgba(60,60,80,0.12);
+  padding: 17px 17px 13px 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #eceffd;
+}
+
+.profileInfoName {
+  font-weight: 600;
+  font-size: 1.08rem;
+  color: #243263;
+  margin-bottom: 7px;
+}
+.profileInfoEmail {
+  color: #49588b;
+  font-size: .97rem;
+  word-break: break-all;
+}
+
+/* Class buttons area */
+.mainContent {
+  margin: 60px auto 0 60px;
+  max-width: 760px;
+  width: 100%;
+  background: none;
+}
+
+.createClassBtn {
+  background: #5465ff;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 1.09rem;
+  font-weight: 600;
+  padding: 12px 26px;
+  box-shadow: 0 1.5px 8px rgba(81,91,210,0.09);
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: background 0.17s;
+  display: block;
+}
+
+.createClassBtn:hover {
+  background: #3840b8;
+}
+
+.classesList {
+  margin-top: 6px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.noClassMsg {
+  color: #8a98b7;
+  font-size: 1.06rem;
+  margin-top: 15px;
+  text-align: center;
+}
+
+/* Class Card */
+.classCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e8eeff;
+  border-radius: 13px;
+  padding: 20px 28px 22px 28px;
+  font-size: 1.15rem;
+  box-shadow: 0 2px 14px rgba(140,160,200,0.06);
+  transition: background 0.16s;
+  cursor: pointer;
+  min-width: 320px;
+}
+
+.classCard:hover {
+  background: #cfdafd;
+}
+
+.classInfoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.className {
+  font-weight: 700;
+  color: #283154;
+  font-size: 1.1rem;
+}
+
+.subjectName {
+  color: #5372ad;
+  font-size: .99rem;
+  margin-top: 2px;
+}
+
+.classCode {
+  font-weight: 550;
+  color: #274088;
+  font-size: 1.03rem;
+}
+
+/* Modal overlay and box */
+.classModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 61, 109, 0.13);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.classModal {
+  background: #fff;
+  border-radius: 14px;
+  min-width: 320px;
+  max-width: 97vw;
+  box-shadow: 0 4px 38px rgba(42,60,110,0.13);
+  padding: 34px 30px 26px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.classModal h3 {
+  margin-bottom: 7px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.classModal label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #243263;
+  margin-bottom: 3px;
+}
+
+.classModal input {
+  margin-top: 6px;
+  padding: 9px 13px;
+  font-size: 1.04rem;
+  border-radius: 7px;
+  border: 1.4px solid #d9def3;
+  outline: none;
+  background: #f6f7fd;
+  font-weight: 500;
+  color: #354375;
+}
+
+.classModal input:focus {
+  border-color: #5465ff;
+  background: #f1f4fd;
+}
+
+.modalError {
+  color: #e53e3e;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: -9px;
+}
+
+.modalBtns {
+  margin-top: 9px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modalCancel, .modalSubmit {
+  border: none;
+  border-radius: 7px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.modalCancel {
+  background: #e9e9ee;
+  color: #565a7a;
+}
+
+.modalCancel:hover {
+  background: #ccd2e5;
+}
+
+.modalSubmit {
+  background: #5465ff;
+  color: #fff;
+}
+
+.modalSubmit:hover {
+  background: #3741b7;
+}
+
+@media (max-width: 900px) {
+  .mainContent {
+    margin: 46px 0 0 12px;
+    max-width: 99vw;
+  }
+  .dashboardHeader {
+    padding-right: 10px;
+  }
+  .teacherSidebar {
+    width: 54px;
+  }
+}
+
+@media (max-width: 640px) {
+  .teacherSidebar {
+    display: none;
+  }
+  .mainContent {
+    margin: 28px 6px 0 6px;
+    padding: 0 2vw;
+    max-width: 100vw;
+  }
+}

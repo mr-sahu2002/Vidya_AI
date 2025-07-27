@@ -1,0 +1,9 @@
+experiment/
+others/
+.env
+data/
+backend/google-service-account.json
+backend/__pycache__/
+rag/__pycache__/
+vidyaai-1dcfa-firebase-adminsdk-fbsvc-513f50d8d1.json
+vidyaai-1dcfa-firebase-adminsdk-fbsvc-513f50d8d1.json

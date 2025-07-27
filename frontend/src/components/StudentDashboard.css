@@ -1,0 +1,221 @@
+.studentDashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+}
+
+/* Sidebar */
+.studentSidebar {
+  width: 240px;
+  background: #fff;
+  box-shadow: 1.5px 0 6px rgba(36,50,120,0.06);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  min-height: 100vh;
+  border-right: 1px solid #e5e7eb;
+}
+
+.sidebarLogo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 1.17rem;
+  font-weight: bold;
+  color: #2c356a;
+  padding: 27px 0 15px 22px;
+  border-bottom: 1px solid #f5f5f7;
+}
+
+.emoji {
+  font-size: 1.35rem;
+  margin-right: 1px;
+}
+
+.brand {
+  letter-spacing: -0.5px;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  gap: 3px;
+}
+
+.sidebarBtn {
+  background: none;
+  border: none;
+  color: #223355;
+  text-align: left;
+  font-size: 1.06rem;
+  padding: 13px 15px 13px 38px;
+  transition: background 0.17s, color 0.17s;
+  border-radius: 0 28px 28px 0;
+  cursor: pointer;
+  margin-bottom: 2px;
+}
+
+.sidebarBtn:hover,
+.sidebarBtn:focus {
+  background: #e6ecfa;
+  color: #4972db;
+  outline: none;
+}
+
+/* Main */
+.dashboardMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboardHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  justify-content: flex-end;
+  padding: 25px 38px 0 0;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatarAndPersona {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.profileAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dde5ff 70%, #888ba6 100%);
+  color: #3c4e70;
+  font-size: 1.38rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.13s;
+  box-shadow: 0 2px 6px rgba(132,152,200,0.06);
+}
+
+.profileAvatar:hover {
+  box-shadow: 0 4px 12px rgba(132,152,200,0.13);
+}
+
+.profilePopover {
+  position: absolute;
+  right: 74px;
+  top: 54px;
+  z-index: 4;
+  min-width: 220px;
+  background: #fff;
+  border-radius: 13px;
+  box-shadow: 0 2px 20px rgba(60,60,80,0.12);
+  padding: 19px 20px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #eceffd;
+}
+
+.profileInfoName {
+  font-weight: 600;
+  font-size: 1.09rem;
+  color: #243263;
+  margin-bottom: 7px;
+}
+.profileInfoEmail {
+  color: #49588b;
+  margin-bottom: 4px;
+  font-size: .99rem;
+  word-break: break-all;
+}
+.profileInfoUSN {
+  color: #647286;
+  font-size: .96rem;
+}
+
+.editPersonaBtn {
+  background: #eef1fe;
+  color: #5b63e6;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: .97rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background 0.17s, color 0.15s;
+}
+
+.editPersonaBtn:hover {
+  background: #CCD4FE;
+  color: #2833a3;
+}
+
+.mainContent {
+  margin: 60px auto 0 60px;
+  max-width: 700px;
+  background: none;
+}
+
+.welcomeBack {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c344e;
+  margin-bottom: 12px;
+  letter-spacing: -0.4px;
+}
+
+.dashboardIntro {
+  font-size: 1.07rem;
+  color: #4d5870;
+  line-height: 1.58;
+  font-weight: 400;
+  max-width: 600px;
+}
+
+@media (max-width: 900px) {
+  .mainContent {
+    margin: 46px 0 0 15px;
+    max-width: 98vw;
+    min-width: unset;
+  }
+  .dashboardHeader {
+    padding-right: 12px;
+  }
+  .studentSidebar {
+    width: 60px;
+    /* optional: make icon mode sidebar on small screens */
+  }
+}
+
+@media (max-width: 620px) {
+  .studentSidebar {
+    display: none;
+  }
+  .dashboardHeader {
+    padding-top: 10px;
+    padding-right: 8px;
+  }
+  .mainContent {
+    margin: 28px 8px 0 8px;
+    padding: 0 2vw;
+    max-width: 99vw;
+  }
+}

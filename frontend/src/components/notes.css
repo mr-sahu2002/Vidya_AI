@@ -1,0 +1,146 @@
+body {
+  background: #f4f6fb;
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.notes-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 230px;
+  background: #232369;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 0 0 0;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 38px;
+  flex-direction: column;
+}
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+  border: 3px solid #5862fa;
+  background: #fff;
+}
+.profile-name {
+  font-weight: 700;
+  font-size: 1.12rem;
+}
+.profile-role {
+  font-size: 0.93rem;
+  color: #b6baf8;
+  margin-top: 3px;
+}
+
+.nav-links {
+  width: 100%;
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 9px 34px;
+  font-size: 1.08rem;
+  color: #d9def6;
+  cursor: pointer;
+  border-left: 3.5px solid transparent;
+  transition: background 0.19s, border-color 0.19s;
+}
+.nav-link.active,
+.nav-link:hover {
+  background: #2f2f82;
+  color: #fff;
+  border-left: 3.5px solid #42e6a4;
+}
+.nav-icon {
+  font-size: 1.28rem;
+  margin-right: 10px;
+}
+
+/* Main notes area */
+.notes-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f4f6fb;
+  min-width: 0;
+  padding: 0;
+}
+
+.notes-header {
+  display: flex;
+  align-items: center;
+  padding: 28px 30px 12px 30px;
+  background: #fff;
+  border-bottom: 1.5px solid #ebeeff;
+}
+.notes-icon {
+  font-size: 2rem;
+  margin-right: 10px;
+}
+.notes-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #27386a;
+  letter-spacing: 0.02em;
+}
+
+.notes-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 36px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Placeholder until backend is ready */
+.notes-placeholder {
+  width: 420px;
+  min-height: 160px;
+  background: #e6eaff;
+  padding: 45px 32px;
+  border-radius: 15px;
+  color: #232369;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(44, 53, 123, 0.08);
+  font-size: 1.13rem;
+}
+
+@media (max-width: 750px) {
+  .notes-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100vw;
+    flex-direction: row;
+    padding: 12px 0;
+    justify-content: flex-start;
+    gap: 24px;
+  }
+  .notes-header {
+    padding: 12px;
+  }
+  .notes-content {
+    padding: 14px 3vw;
+  }
+  .notes-placeholder {
+    width: 100%;
+    font-size: 0.98rem;
+    padding: 25px 5vw;
+  }
+}

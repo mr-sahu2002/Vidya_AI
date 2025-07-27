@@ -1,0 +1,181 @@
+/* Global body style */
+body {
+  background: #fafbfc; /* same as other pages */
+  margin: 0;
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  color: #222954;
+}
+
+/* Container styling */
+.signup-container {
+  max-width: 700px;
+  margin: 48px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  padding: 36px 32px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo section */
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  user-select: none;
+}
+
+.vidyaai-logo {
+  font-size: 2.4rem;
+  margin-right: 14px;
+  font-weight: 700;
+  color: #2833a3;
+  letter-spacing: -0.02em;
+}
+
+.vidyaai-text {
+  font-size: 1.7rem;
+  letter-spacing: 0.04em;
+  color: #2833a3;
+  font-weight: 700;
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+}
+
+/* Header */
+.signup-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.signup-header h2 {
+  font-size: 1.85rem;
+  color: #1c2127;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Tabs */
+.signup-tabs {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.signup-tabs button {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1.06rem;
+  font-weight: 600;
+  color: #606374;
+  cursor: pointer;
+  padding-bottom: 8px;
+  border-bottom: 3px solid transparent;
+  transition: color 0.22s ease, border-bottom 0.22s ease;
+  letter-spacing: 0.03em;
+}
+
+.signup-tabs button.active {
+  color: #2833a3;
+  border-bottom: 3px solid #5c6fff;
+  font-weight: 700;
+}
+
+/* Form */
+.signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.signup-form label {
+  color: #222954;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  margin-bottom: 4px;
+}
+
+.signup-form input {
+  width: 100%;
+  font-size: 1.05rem;
+  padding: 12px 14px;
+  border: 1.5px solid #e1e6eb;
+  background: #f7f9fb;
+  border-radius: 8px;
+  outline: none;
+  color: #223355;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signup-form input:focus {
+  border-color: #5c6fff;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(92, 111, 255, 0.3);
+}
+
+/* Button */
+.signup-btn {
+  background: linear-gradient(91deg, #5c6fff 70%, #42e6a4 130%);
+  color: #fff;
+  font-size: 1.18rem;
+  font-weight: 700;
+  padding: 13px 0;
+  border: none;
+  border-radius: 8px;
+  margin-top: 14px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 14px rgba(92, 111, 255, 0.3);
+  transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.signup-btn:hover {
+  background: linear-gradient(91deg, #495bde 75%, #20e1b4 140%);
+  box-shadow: 0 6px 20px rgba(33, 131, 119, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .signup-container {
+    max-width: 96vw;
+    padding: 28px 6vw 24px 6vw;
+  }
+  .vidyaai-logo {
+    font-size: 1.9rem;
+  }
+  .vidyaai-text {
+    font-size: 1.3rem;
+  }
+  .signup-header h2 {
+    font-size: 1.4rem;
+  }
+  .signup-tabs {
+    gap: 18px;
+    margin-bottom: 22px;
+  }
+  .signup-tabs button {
+    font-size: 0.95rem;
+    padding-bottom: 6px;
+  }
+  .signup-form label {
+    font-size: 0.9rem;
+  }
+  .signup-form input {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+  .signup-btn {
+    font-size: 1.05rem;
+    padding: 11px 0;
+  }
+}

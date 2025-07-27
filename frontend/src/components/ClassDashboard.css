@@ -1,0 +1,221 @@
+.classDashboard {
+  max-width: 900px;
+  margin: 32px auto;
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  padding: 0 16px;
+}
+
+/* Header with profile and add class button */
+.dashboardHeader {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* Profile avatar & info */
+.profileContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profileAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dde5ff 70%, #888ba6 100%);
+  color: #3c4e70;
+  font-size: 1.38rem;
+  font-weight: 600;
+  border: none;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #2c344e;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.userName {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.userEmail {
+  color: #606374;
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+/* Add Class button style */
+.addClassBtn {
+  background-color: #5465ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 22px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.22s ease-in-out;
+}
+
+.addClassBtn:hover {
+  background-color: #3840b8;
+}
+
+/* Add Class form */
+.addClassForm {
+  margin: 0 auto 36px auto;
+  max-width: 540px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.addClassForm label {
+  flex: 1 0 100%;
+  font-weight: 600;
+  color: #283154;
+  margin-bottom: 8px;
+  font-size: 1.06rem;
+}
+
+.addClassForm input {
+  flex: 1 1 220px;
+  padding: 9px 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1.4px solid #cad1e9;
+  outline: none;
+  transition: box-shadow 0.22s ease-in-out, border-color 0.22s ease-in-out;
+}
+
+.addClassForm input:focus {
+  border-color: #5465ff;
+  box-shadow: 0 0 8px rgba(84, 101, 255, 0.4);
+}
+
+.addClassForm button {
+  flex: 0 0 auto;
+  padding: 10px 28px;
+  background: #5465ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.22s ease-in-out;
+}
+
+.addClassForm button:hover {
+  background-color: #3840b8;
+}
+
+.errorMsg {
+  width: 100%;
+  color: #e53e3e;
+  margin-top: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Classes container */
+.classesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Single class button styles */
+.classButton {
+  width: 100%;
+  text-align: left;
+  padding: 18px 24px;
+  border-radius: 12px;
+  border: 1.8px solid #5465ff;
+  background-color: #f0f3ff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: default;
+  color: #283154;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.classButton:hover {
+  background-color: #d7dbff;
+}
+
+/* Class details */
+.classDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.className {
+  font-weight: 700;
+  font-size: 1.18rem;
+  color: #1e2a4f;
+}
+
+.subjectName {
+  font-size: 1rem;
+  color: #5465ff;
+}
+
+.classCode {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3840b8;
+}
+
+/* No classes message */
+.noClassesMsg {
+  text-align: center;
+  font-size: 1rem;
+  color: #7a7f8d;
+  margin-top: 28px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .addClassForm {
+    gap: 8px;
+  }
+
+  .addClassForm input {
+    flex-basis: 100%;
+  }
+
+  .addClassForm button {
+    width: 100%;
+  }
+
+  .classButton {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .classCode {
+    align-self: flex-end;
+    font-size: 0.95rem;
+  }
+}
